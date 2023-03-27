@@ -1,0 +1,106 @@
+---
+title: "HAB Prediction Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+source("setup.R")
+```
+
+Inputs {.sidebar data-width=300}
+=======================================================================
+
+```{r}
+numericInput(
+  "urban_dev",
+  "% Developed land",
+  min = 0,
+  max = 1,
+  step = 0.05,
+  value = 0.5,
+)
+
+numericInput(
+  "hay_pasture",
+  "% Hay/Pasture",
+  min = 0,
+  max = 1,
+  step = 0.05,
+  value = 0.5,
+)
+
+numericInput(
+  "mcyam_gene_copies",
+  "McyA M gene copies",
+  min = 0,
+  value = 500
+)
+
+numericInput(
+  "tkn",
+  "Total Kjeldahl Nitrogen (mg/l)",
+  min = 0,
+  value = 1
+)
+
+numericInput(
+  "pH",
+  "pH",
+  min = 0,
+  max = 14,
+  value = 7
+)
+
+numericInput(
+  "doc_ppm",
+  "Dissolved organic carbon (ppm)",
+  min = 0,
+  value = 1
+)
+
+numericInput(
+  "avg_dpt",
+  "Dewpoint temperature",
+  min = 0,
+  value = 70
+)
+
+```
+
+```{r}
+selected_urban_dev_percentage <- reactive(
+  input$urban_dev %>% as.numeric()
+)
+
+selected_mcyam_gene_copies <- reactive(
+  input$mcyam_gene_copies %>% as.numeric()
+)
+```
+
+
+#
+
+This is a prediction dashboard that uses the ensemble model created blah blah blah.
+
+### Prediction result
+
+
+```{r}
+renderText({
+  this_text <- str_interp("% Developed Land: ${selected_urban_dev_percentage()}")
+  this_text
+})
+```
+
+### Chart B
+
+```{r}
+renderText({
+  this_text <- str_interp("McyA M gene copies: ${selected_mcyam_gene_copies()}")
+  this_text
+})
+```
