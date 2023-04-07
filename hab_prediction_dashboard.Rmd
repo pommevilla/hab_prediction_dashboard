@@ -8,7 +8,7 @@ runtime: shiny
 ---
 
 ```{r setup, include=FALSE}
-source("setup.R")
+source("src/setup.R")
 ```
 
 Inputs {.sidebar data-width=300}
